@@ -11,7 +11,7 @@ const variants = {
   animate: { opacity: 1, x: 0 },
   exit: { opacity: 0, x: -20 },
 };
-const transition = { duration: 0.4, ease: [0.16, 1, 0.3, 1] }; // Cinematic ease
+const transition = { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }; // Cinematic ease
 
 // Premium Blur-up Heading
 const CinematicHeading = ({ children, className }: { children: React.ReactNode, className?: string }) => (
