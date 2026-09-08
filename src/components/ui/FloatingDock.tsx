@@ -230,19 +230,6 @@ export function FloatingDock() {
           <div className="w-12 h-12 rounded-full bg-neutral-200/50 dark:bg-neutral-800/50" />
         )}
 
-        <div className="w-[1px] h-7 bg-neutral-300 dark:bg-neutral-800 mx-1 self-center" />
-
-        {/* Pulsing Status Pill */}
-        <div className="relative group flex items-center justify-center h-12 px-3 rounded-full bg-white/20 dark:bg-white/5 border border-white/30 dark:border-white/10 self-center shadow-sm">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-          </span>
-
-          <span className="absolute -top-11 left-1/2 -translate-x-1/2 hidden group-hover:block whitespace-nowrap rounded-lg bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 px-3 py-1 text-xs font-mono shadow-2xl pointer-events-none z-50">
-            Available for work
-          </span>
-        </div>
       </motion.div>
     </div>
   );
