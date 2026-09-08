@@ -1,0 +1,133 @@
+import { PortfolioData } from '@/types';
+
+export const portfolioData: PortfolioData = {
+  name: 'Swami Malode',
+  handle: '@code by SWAMI',
+  title: "Hi I'm Swami",
+  tagline: 'I build for the web.',
+  subtitle: 'I build Websites that look and feel good to use.\nDesign Engineer and Full Stack Developer',
+  status: "psst.. i'm open to work",
+  meetingLink: 'https://cal.com',
+  email: 'swamimalodeofficial@gmail.com',
+  githubFollowers: 44,
+  socials: {
+    twitter: 'https://x.com',
+    linkedin: 'https://linkedin.com',
+    github: 'https://github.com',
+    discord: 'https://discord.com',
+  },
+  projects: [
+    {
+      id: 'vidstudio',
+      title: 'VidStudio',
+      description: 'A video editing app that allows users to create and edit videos with a variety of tools and effects.',
+      image: '/projects/vidstudio.jpg',
+      liveUrl: 'https://vidstudio.app',
+      status: 'live',
+      tags: ['React', 'Next.js', 'WebCodecs', 'TailwindCSS'],
+    },
+    {
+      id: 'rareui',
+      title: 'Rareui',
+      description: 'A collection of rare, ready-to-use UI components and animations you can actually drop into your next project.',
+      image: '/projects/rareui.jpg',
+      liveUrl: 'https://rareui.com',
+      githubUrl: 'https://github.com/swami/rareui',
+      stars: 870,
+      status: 'live',
+      tags: ['TypeScript', 'Framer Motion', 'TailwindCSS'],
+    },
+    {
+      id: 'layers-landing',
+      title: 'Layers Landing Page',
+      description: 'A SaaS landing page with interactive animations built using modern frontend technologies.',
+      image: '/projects/layers.jpg',
+      liveUrl: 'https://layers.design',
+      githubUrl: 'https://github.com/swami/layers-landing',
+      stars: 11,
+      status: 'live',
+      tags: ['Next.js', 'React', 'Motion'],
+    },
+  ],
+  experiences: [
+    {
+      id: 'conduit-commerce',
+      company: 'Conduit Commerce',
+      role: 'Frontend Engineering',
+      type: 'Intern',
+      period: 'Aug 2025 - Present',
+      location: 'Remote',
+      logoBg: 'bg-blue-600',
+      logoText: 'CC',
+      description: [
+        'Architected and deployed responsive component libraries used across core e-commerce dashboard pages.',
+        'Optimized page load speed by 35% using Next.js image optimization and lazy-loaded dynamic imports.',
+        'Collaborated with design teams to craft micro-interactions and micro-animations.'
+      ],
+      skills: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Zustand']
+    },
+    {
+      id: 'mach5-software',
+      company: 'Mach5 Software',
+      role: 'Design Engineer',
+      type: 'Freelance',
+      period: 'Mar 2025 - May 2025',
+      location: 'Remote',
+      logoBg: 'bg-orange-600',
+      logoText: 'M5',
+      description: [
+        'Built full-stack client web applications with interactive canvas features and custom SVG charts.',
+        'Integrated real-time database webhooks and optimized API payloads for fluid user experiences.',
+        'Crafted aesthetic brand identity systems and design token architectures.'
+      ],
+      skills: ['React', 'Node.js', 'Supabase', 'Figma', 'Tailwind CSS']
+    }
+  ],
+  skills: [
+    { name: 'TypeScript', icon: 'TS', category: 'languages', color: '#3178C6' },
+    { name: 'JavaScript', icon: 'JS', category: 'languages', color: '#F7DF1E' },
+    { name: 'React', icon: '⚛️', category: 'frontend', color: '#61DAFB' },
+    { name: 'Next.js', icon: '▲', category: 'frontend', color: '#FFFFFF' },
+    { name: 'Tailwind CSS', icon: '🌊', category: 'frontend', color: '#06B6D4' },
+    { name: 'HTML', icon: '5', category: 'languages', color: '#E34F26' },
+    { name: 'CSS', icon: '3', category: 'languages', color: '#1572B6' },
+    { name: 'Motion', icon: 'M', category: 'frontend', color: '#FF0055' },
+    { name: 'SVG Animation', icon: '✳️', category: 'frontend', color: '#FFB800' },
+    { name: 'Git', icon: '🌿', category: 'tools', color: '#F05032' },
+    { name: 'Redux', icon: '⚛️', category: 'frontend', color: '#764ABC' },
+    { name: 'shadcn/ui', icon: '⌘', category: 'frontend', color: '#FFFFFF' },
+    { name: 'Figma', icon: '❖', category: 'design', color: '#F24E1E' },
+    { name: 'Node.js', icon: '🟢', category: 'backend', color: '#339933' },
+    { name: 'Supabase', icon: '⚡', category: 'backend', color: '#3ECF8E' },
+    { name: 'Bun', icon: '🍞', category: 'tools', color: '#FBF0DF' },
+    { name: 'ChatGPT', icon: '🤖', category: 'tools', color: '#10A37F' },
+    { name: 'Claude', icon: '✳️', category: 'tools', color: '#D97706' },
+    { name: 'Cursor', icon: '↘', category: 'tools', color: '#3B82F6' },
+  ],
+  bio: {
+    intro: "Heyy!! I'm a Design Engineer and a Full Stack Developer.",
+    details: "I love both Design & Development. I create websites that are not just beautiful, but functional and reliable.",
+    currentBuilding: {
+      name: 'VidStudio',
+      description: '- a video recording tool that help anyone record high-quality, beautiful product videos with ease & it\'s free.',
+      url: 'https://vidstudio.app',
+    },
+    closing: "I'm always looking for new opportunities to learn and grow.",
+  },
+  colophon: {
+    craftedBy: 'Swami Malode',
+    inspiredBy: [
+      { name: 'dennissnellenberg.com', url: 'https://dennissnellenberg.com' },
+      { name: 'tailwindcss.com', url: 'https://tailwindcss.com' },
+      { name: 'u1.shadcn.com', url: 'https://ui.shadcn.com' },
+      { name: 'vercel.com', url: 'https://vercel.com' },
+    ],
+    builtWith: [
+      { name: 'Next.js', url: 'https://nextjs.org' },
+      { name: 'TypeScript', url: 'https://typescriptlang.org' },
+      { name: 'Framer Motion', url: 'https://framer.com/motion' },
+      { name: 'Tailwind CSS', url: 'https://tailwindcss.com' },
+      { name: 'Vercel', url: 'https://vercel.com' },
+    ],
+  },
+};
