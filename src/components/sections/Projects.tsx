@@ -88,7 +88,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 py-2.5 px-4 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-100 hover:bg-neutral-200 dark:bg-[#2c2c32] dark:hover:bg-[#35353c] text-[#37352f] dark:text-white font-medium text-xs sm:text-sm text-center transition-colors duration-200 shadow-xs flex items-center justify-center gap-1.5"
+            className="flex-1 py-2 px-3 sm:py-2.5 sm:px-4 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-100 hover:bg-neutral-200 dark:bg-[#2c2c32] dark:hover:bg-[#35353c] text-[#37352f] dark:text-white font-medium text-[11px] sm:text-xs text-center transition-colors duration-200 shadow-xs flex items-center justify-center gap-1.5"
           >
             View Live
           </a>
@@ -99,7 +99,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 py-2.5 px-4 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-100 hover:bg-neutral-200 dark:bg-[#2c2c32] dark:hover:bg-[#35353c] text-[#37352f] dark:text-white font-medium text-xs sm:text-sm text-center transition-colors duration-200 shadow-xs flex items-center justify-center gap-1.5"
+            className="flex-1 py-2 px-3 sm:py-2.5 sm:px-4 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-100 hover:bg-neutral-200 dark:bg-[#2c2c32] dark:hover:bg-[#35353c] text-[#37352f] dark:text-white font-medium text-[11px] sm:text-xs text-center transition-colors duration-200 shadow-xs flex items-center justify-center gap-1.5"
           >
             <GithubIcon className="w-4 h-4" />
             Github
@@ -130,7 +130,7 @@ export function Projects() {
             href={portfolioData.socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-100 hover:bg-neutral-200 dark:bg-[#222226] dark:hover:bg-[#2a2a30] text-[#37352f] dark:text-white text-sm font-medium transition-colors shadow-sm"
+            className="px-6 py-2.5 sm:px-8 sm:py-3 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-100 hover:bg-neutral-200 dark:bg-[#222226] dark:hover:bg-[#2a2a30] text-[#37352f] dark:text-white text-xs sm:text-sm font-medium transition-colors shadow-sm"
           >
             View All Projects
           </a>

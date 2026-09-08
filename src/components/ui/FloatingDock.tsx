@@ -103,7 +103,7 @@ function DockIcon({
       ref={ref}
       style={{ width, height: width, y }}
       onClick={onClick}
-      className="relative group flex items-center justify-center rounded-full bg-white/90 dark:bg-[#202024]/95 border border-neutral-200/80 dark:border-neutral-700/80 text-neutral-700 dark:text-neutral-200 hover:text-neutral-950 dark:hover:text-white transition-colors shadow-lg shadow-black/5 dark:shadow-black/30 cursor-pointer select-none"
+      className="relative group flex items-center justify-center rounded-full bg-white/20 dark:bg-white/5 border border-white/30 dark:border-white/10 text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white transition-colors shadow-sm cursor-pointer select-none hover:bg-white/40 dark:hover:bg-white/10"
       aria-label={name}
     >
       <motion.div style={{ scale: iconScale }} className="flex items-center justify-center">
@@ -175,14 +175,14 @@ export function FloatingDock() {
   ];
 
   return (
-    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto">
+    <div className="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto">
       <motion.div
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
         initial={{ y: 60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-        className="flex items-end gap-2.5 px-4 py-3 rounded-full border border-white/50 dark:border-neutral-800/80 bg-white/95 dark:bg-[#19191d]/95 backdrop-blur-lg shadow-2xl shadow-black/20 dark:shadow-black/70 ring-1 ring-black/5 dark:ring-white/10 will-change-transform"
+        className="flex items-end gap-2 px-3 sm:gap-2.5 sm:px-4 py-2 sm:py-3 rounded-full border border-white/40 dark:border-white/10 bg-white/30 dark:bg-black/30 backdrop-blur-xl shadow-2xl shadow-black/10 dark:shadow-black/50 ring-1 ring-black/5 dark:ring-white/5 will-change-transform scale-[0.8] sm:scale-100 origin-bottom"
       >
         {/* Social Links */}
         {socials.map((social) => (
@@ -229,7 +229,7 @@ export function FloatingDock() {
         <div className="w-[1px] h-7 bg-neutral-300 dark:bg-neutral-800 mx-1 self-center" />
 
         {/* Pulsing Status Pill */}
-        <div className="relative group flex items-center justify-center h-12 px-3 rounded-full bg-white/90 dark:bg-[#202024]/95 border border-neutral-200/80 dark:border-neutral-700/80 self-center">
+        <div className="relative group flex items-center justify-center h-12 px-3 rounded-full bg-white/20 dark:bg-white/5 border border-white/30 dark:border-white/10 self-center shadow-sm">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>

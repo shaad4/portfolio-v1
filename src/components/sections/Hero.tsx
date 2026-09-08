@@ -89,7 +89,7 @@ export function Hero() {
             href={portfolioData.meetingLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-7 py-3.5 rounded-xl border border-neutral-300 dark:border-neutral-700/80 bg-neutral-100/90 dark:bg-[#222226] hover:bg-neutral-200 dark:hover:bg-[#2c2c32] text-[#37352f] dark:text-white font-medium text-base transition-all duration-300 shadow-sm backdrop-blur-xl hover:scale-105 active:scale-95"
+            className="px-5 py-2.5 sm:px-7 sm:py-3.5 rounded-xl border border-neutral-300 dark:border-neutral-700/80 bg-neutral-100/90 dark:bg-[#222226] hover:bg-neutral-200 dark:hover:bg-[#2c2c32] text-[#37352f] dark:text-white font-medium text-sm sm:text-base transition-all duration-300 shadow-sm backdrop-blur-xl hover:scale-105 active:scale-95"
           >
             Book a Meeting
           </a>

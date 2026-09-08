@@ -33,7 +33,7 @@ export function About() {
               href={bio.currentBuilding.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 dark:bg-[#28282e] border border-neutral-300 dark:border-neutral-700 text-[#37352f] dark:text-white font-medium text-sm sm:text-base hover:bg-neutral-200 dark:hover:bg-[#32323a] transition-colors shadow-xs"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-neutral-100 dark:bg-[#28282e] border border-neutral-300 dark:border-neutral-700 text-[#37352f] dark:text-white font-medium text-[13px] sm:text-sm hover:bg-neutral-200 dark:hover:bg-[#32323a] transition-colors shadow-xs"
             >
               <Video className="w-4 h-4 text-indigo-500" />
               <span>{bio.currentBuilding.name}</span>
