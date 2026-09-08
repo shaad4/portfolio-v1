@@ -85,6 +85,10 @@ function DockIcon({
   const ref = useRef<HTMLDivElement>(null);
 
   const distance = useTransform(mouseX, (val: number) => {
+    // Disable hover magnification effect entirely on mobile/touch screens
+    if (typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches) {
+      return 1000; 
+    }
     const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
     return val - bounds.x - bounds.width / 2;
   });
