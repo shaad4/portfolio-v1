@@ -87,12 +87,10 @@ export function Hero() {
         >
           {/* Button */}
           <a
-            href={portfolioData.meetingLink}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#connect"
             className="px-4 py-2 sm:px-8 sm:py-3.5 rounded-xl bg-[#151515] border border-[#333] text-white font-medium text-xs sm:text-base transition-all duration-300 hover:bg-[#1a1a1a] hover:scale-[1.02] active:scale-95 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] flex items-center justify-center shrink-0"
           >
-            Book a Meeting
+            Let&apos;s Connect!
           </a>
 
           {/* Curly arrow and text with glow effect */}

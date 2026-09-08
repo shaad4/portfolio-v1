@@ -46,7 +46,7 @@ export function CustomCursor() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 z-[99999] pointer-events-none hidden md:block"
+      className="fixed top-0 left-0 z-[9999999] pointer-events-none hidden md:block"
       style={{
         x: cursorX,
         y: cursorY,

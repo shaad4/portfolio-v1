@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Preloader } from '@/components/ui/Preloader';
+import { ContactFlow } from '@/components/contact-flow/ContactFlow';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Preloader />
           <CustomCursor />
+          <ContactFlow />
           {children}
         </ThemeProvider>
       </body>
