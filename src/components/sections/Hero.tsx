@@ -98,7 +98,7 @@ export function Hero() {
           {/* Curly arrow and text with glow effect */}
           <div className="group flex flex-row items-center gap-1 sm:gap-2 select-none cursor-default transition-all duration-300">
             <svg
-              className="w-8 h-8 sm:w-16 sm:h-16 stroke-[#6b6b6b] fill-none transform -translate-y-1 sm:-translate-y-2 transition-all duration-300 group-hover:stroke-white group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] shrink-0"
+              className="w-8 h-8 sm:w-16 sm:h-16 stroke-[#6b6b6b] fill-none transform -translate-y-1 sm:-translate-y-2 transition-all duration-300 group-hover:stroke-black dark:group-hover:stroke-white group-hover:drop-shadow-[0_0_10px_rgba(0,0,0,0.4)] dark:group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] shrink-0"
               viewBox="0 0 100 100"
               strokeWidth="3.5"
               strokeLinecap="round"
@@ -107,7 +107,7 @@ export function Hero() {
               <path d="M 25,40 C 45,30 65,40 65,60 C 65,80 35,80 35,60 C 35,40 65,30 85,75" />
               <path d="M 25,40 L 40,28 M 25,40 L 30,55" />
             </svg>
-            <div className="flex flex-col text-[#7b7b7b] dark:text-[#6b6b6b] font-mono text-[9px] sm:text-[13px] leading-snug sm:leading-snug -rotate-[8deg] mt-3 sm:mt-6 transition-all duration-300 group-hover:text-white group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] shrink-0 whitespace-nowrap">
+            <div className="flex flex-col text-[#7b7b7b] dark:text-[#6b6b6b] font-mono text-[9px] sm:text-[13px] leading-snug sm:leading-snug -rotate-[8deg] mt-3 sm:mt-6 transition-all duration-300 group-hover:text-black dark:group-hover:text-white group-hover:drop-shadow-[0_0_10px_rgba(0,0,0,0.4)] dark:group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] shrink-0 whitespace-nowrap">
               <span>psst... i&apos;m</span>
               <span>open to work</span>
             </div>
