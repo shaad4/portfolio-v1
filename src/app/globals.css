@@ -92,3 +92,10 @@ body {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--dock-border);
 }
+
+/* Hide native cursor on desktop to allow CustomCursor to shine */
+@media (min-width: 768px) {
+  * {
+    cursor: none !important;
+  }
+}

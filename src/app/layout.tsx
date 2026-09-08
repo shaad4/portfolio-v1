@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { CustomCursor } from '@/components/ui/CustomCursor';
+import { Preloader } from '@/components/ui/Preloader';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,6 +28,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="dark">
       <body className={`${inter.className} min-h-screen antialiased selection:bg-neutral-800 selection:text-white dark:selection:bg-neutral-200 dark:selection:text-black`} style={{ backgroundColor: 'var(--bg-body)', color: 'var(--text-main)' }}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <Preloader />
+          <CustomCursor />
           {children}
         </ThemeProvider>
       </body>

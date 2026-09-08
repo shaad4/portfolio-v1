@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { portfolioData } from '@/data/portfolioData';
 import { Copy, Check, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function Footer() {
   const [copied, setCopied] = useState(false);
@@ -14,7 +15,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative pt-16 pb-12 px-6 sm:px-10 md:px-14 max-w-[1600px] mx-auto border-t border-neutral-200 dark:border-neutral-800 text-xs sm:text-sm font-mono w-full overflow-hidden">
+    <footer className="relative pt-16 pb-0 px-6 sm:px-10 md:px-14 max-w-[1600px] mx-auto border-t border-neutral-200 dark:border-neutral-800 text-xs sm:text-sm font-mono w-full overflow-hidden">
       {/* Quick Outbound Links */}
       <div className="pb-16 flex items-center gap-8 font-mono text-sm sm:text-base">
         <a
@@ -135,13 +136,13 @@ export function Footer() {
       </div>
 
       {/* Bottom copyright line */}
-      <div className="border-t border-neutral-200 dark:border-neutral-800 pt-6 text-xs text-[#787774] dark:text-neutral-500">
+      <div className="border-t border-neutral-200 dark:border-neutral-800 pt-6 pb-6 text-xs text-[#787774] dark:text-neutral-500">
         © 2026 Swami Malode
       </div>
 
-      {/* Huge Giant Watermark Typography */}
+      {/* Static Giant Watermark Typography (Endless Design) */}
       <div className="mt-8 pt-4 w-full flex justify-center overflow-hidden pointer-events-none select-none">
-        <h1 className="text-[18vw] font-extrabold tracking-tighter text-neutral-200/60 dark:text-white/[0.04] leading-none uppercase text-center font-sans">
+        <h1 className="text-[35vw] sm:text-[30vw] font-black tracking-[-0.05em] text-neutral-200/60 dark:text-white/[0.04] leading-[0.75] uppercase text-center font-sans whitespace-nowrap">
           SWAMI
         </h1>
       </div>
