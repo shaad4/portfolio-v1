@@ -9,7 +9,7 @@ import { ContactFlow } from '@/components/contact-flow/ContactFlow';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Mohammed Shaad N | Full-Stack Developer',
+  title: 'Shaad | Full-Stack Developer',
   description: 'Portfolio of Mohammed Shaad N — Full-Stack Developer building scalable backend systems and practical web products with Python, Django, FastAPI, and React.',
   keywords: ['Full Stack Developer', 'Backend Developer', 'Python', 'Django', 'FastAPI', 'React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
   authors: [{ name: 'Mohammed Shaad N' }],
