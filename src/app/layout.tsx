@@ -21,9 +21,23 @@ export const metadata: Metadata = {
     apple: '/favicon.svg',
   },
   openGraph: {
-    title: 'Mohammed Shaad N | Full-Stack Developer',
+    title: 'Shaad | Full-Stack Developer',
     description: 'Portfolio of Mohammed Shaad N — Full-Stack Developer building scalable backend systems and practical web products with Python, Django, FastAPI, and React.',
     type: 'website',
+    images: [
+      {
+        url: '/favicon.svg',
+        width: 512,
+        height: 512,
+        alt: 'S Logo - Mohammed Shaad N',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Shaad | Full-Stack Developer',
+    description: 'Portfolio of Mohammed Shaad N — Full-Stack Developer building scalable backend systems and practical web products.',
+    images: ['/favicon.svg'],
   },
 };
 
