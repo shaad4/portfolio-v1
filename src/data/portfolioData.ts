@@ -197,13 +197,6 @@ export const portfolioData: PortfolioData = {
       color: '#009688',
     },
     {
-      name: 'Node.js',
-      icon: '🟢',
-      iconUrl: 'https://cdn.simpleicons.org/nodedotjs/339933',
-      category: 'backend',
-      color: '#339933',
-    },
-    {
       name: 'REST APIs',
       icon: 'API',
       iconUrl: 'https://cdn.simpleicons.org/openapiinitiative/777777', // closest widely-recognized API brand mark
@@ -284,13 +277,6 @@ export const portfolioData: PortfolioData = {
       category: 'backend',
       color: '#FEC514',
     },
-    {
-      name: 'SQLite',
-      icon: 'SQL',
-      iconUrl: 'https://cdn.simpleicons.org/sqlite/003B57',
-      category: 'backend',
-      color: '#003B57',
-    },
 
     // Frontend
     {
@@ -313,13 +299,6 @@ export const portfolioData: PortfolioData = {
       iconUrl: 'https://cdn.simpleicons.org/vite/646CFF',
       category: 'frontend',
       color: '#646CFF',
-    },
-    {
-      name: 'Remix',
-      icon: 'R',
-      iconUrl: 'https://cdn.simpleicons.org/remix/000000/FFFFFF',
-      category: 'frontend',
-      color: '#FFFFFF',
     },
     {
       name: 'Shopify Hydrogen',
