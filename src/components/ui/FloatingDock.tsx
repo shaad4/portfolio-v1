@@ -4,65 +4,26 @@ import { useRef, useEffect, useState, useCallback, createContext, useContext } f
 import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { portfolioData } from '@/data/portfolioData';
-import { GithubIcon, LinkedinIcon, XIcon, DiscordIcon } from '@/components/ui/Icons';
+import { GithubIcon, LinkedinIcon, XIcon, InstagramIcon } from '@/components/ui/Icons';
 import { Sun, Moon } from 'lucide-react';
 
 /* ═══════════════════════════════════════════
-   Theme Ripple Transition System
+   Theme Transition — View Transitions API
    ═══════════════════════════════════════════ */
 
-/**
- * Creates a full-screen overlay div painted in the *destination* theme's
- * background colour, then animates it via CSS `clip-path` from a tiny
- * circle at the click point to a huge circle covering the viewport.
- * 
- * Mid-animation we flip the actual <html> class so the page beneath
- * matches the overlay → the overlay fades out imperceptibly.
- */
-function performRippleTransition(
-  e: React.MouseEvent,
-  nextTheme: 'light' | 'dark',
+function performThemeTransition(
   setTheme: (t: string) => void,
+  nextTheme: 'light' | 'dark',
 ) {
-  const DURATION = 650; // ms — matches CSS animation
-
-  // Prevent double-firing while a ripple is already live
-  if (document.querySelector('.theme-ripple')) return;
-
-  const ripple = document.createElement('div');
-  ripple.classList.add('theme-ripple');
-
-  // Paint the overlay with the *target* theme's background
-  ripple.style.backgroundColor = nextTheme === 'dark' ? '#191919' : '#ffffff';
-
-  // Pass click coordinates to CSS custom properties
-  const xPct = ((e.clientX / window.innerWidth) * 100).toFixed(2);
-  const yPct = ((e.clientY / window.innerHeight) * 100).toFixed(2);
-  ripple.style.setProperty('--ripple-x', `${xPct}%`);
-  ripple.style.setProperty('--ripple-y', `${yPct}%`);
-
-  document.body.appendChild(ripple);
-
-  // Force layout to ensure the element is painted before adding the class
-  void ripple.offsetWidth;
-
-  // Start expanding
-  ripple.classList.add('theme-ripple--expanding');
-
-  // Flip the actual theme roughly when the circle covers ~40 % of the screen
-  setTimeout(() => {
+  // Use the View Transitions API for a smooth, content-blended crossfade
+  if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+    (document as any).startViewTransition(() => {
+      setTheme(nextTheme);
+    });
+  } else {
+    // Graceful fallback for browsers without View Transitions support
     setTheme(nextTheme);
-  }, DURATION * 0.35);
-
-  // Remove the overlay after the animation ends
-  ripple.addEventListener('animationend', () => {
-    ripple.remove();
-  });
-
-  // Safety clean-up in case animationend doesn't fire
-  setTimeout(() => {
-    ripple.remove();
-  }, DURATION + 100);
+  }
 }
 
 /* ═══════════════════════════════════════════
@@ -150,7 +111,7 @@ export function FloatingDock() {
   const handleThemeToggle = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const nextTheme = isDark ? 'light' : 'dark';
-      performRippleTransition(e as unknown as React.MouseEvent, nextTheme, setTheme);
+      performThemeTransition(setTheme, nextTheme);
     },
     [isDark, setTheme],
   );
@@ -172,9 +133,9 @@ export function FloatingDock() {
       url: portfolioData.socials.github,
     },
     {
-      name: 'Discord',
-      icon: <DiscordIcon className="w-5 h-5" />,
-      url: portfolioData.socials.discord,
+      name: 'Instagram',
+      icon: <InstagramIcon className="w-5 h-5" />,
+      url: portfolioData.socials.instagram,
     },
   ];
 

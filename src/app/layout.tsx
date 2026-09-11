@@ -9,13 +9,13 @@ import { ContactFlow } from '@/components/contact-flow/ContactFlow';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Swami Malode | Design Engineer & Full Stack Developer',
-  description: 'Portfolio of Swami Malode - Design Engineer and Full Stack Developer building functional, beautiful web experiences.',
-  keywords: ['Design Engineer', 'Full Stack Developer', 'React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
-  authors: [{ name: 'Swami Malode' }],
+  title: 'Mohammed Shaad N | Full-Stack Developer',
+  description: 'Portfolio of Mohammed Shaad N — Full-Stack Developer building scalable backend systems and practical web products with Python, Django, FastAPI, and React.',
+  keywords: ['Full Stack Developer', 'Backend Developer', 'Python', 'Django', 'FastAPI', 'React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+  authors: [{ name: 'Mohammed Shaad N' }],
   openGraph: {
-    title: 'Swami Malode | Design Engineer & Full Stack Developer',
-    description: 'Portfolio of Swami Malode - Design Engineer and Full Stack Developer building functional, beautiful web experiences.',
+    title: 'Mohammed Shaad N | Full-Stack Developer',
+    description: 'Portfolio of Mohammed Shaad N — Full-Stack Developer building scalable backend systems and practical web products with Python, Django, FastAPI, and React.',
     type: 'website',
   },
 };

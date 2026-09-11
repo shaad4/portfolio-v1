@@ -39,11 +39,21 @@ export function Experience() {
                 >
                   <div className="flex items-center gap-4 sm:gap-5">
                     {/* Logo Avatar */}
-                    <div
-                      className={`w-12 h-12 rounded-xl ${exp.logoBg} text-white flex items-center justify-center font-bold text-base shadow-sm flex-shrink-0`}
-                    >
-                      {exp.logoText}
-                    </div>
+                    {exp.logoUrl ? (
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-sm flex-shrink-0 overflow-hidden bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
+                        <img 
+                          src={exp.logoUrl} 
+                          alt={`${exp.company} logo`} 
+                          className="w-full h-full object-cover" 
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        className={`w-12 h-12 rounded-xl ${exp.logoBg} text-white flex items-center justify-center font-bold text-base shadow-sm flex-shrink-0`}
+                      >
+                        {exp.logoText}
+                      </div>
+                    )}
 
                     <div className="space-y-1">
                       <div className="flex items-center gap-3 flex-wrap">

@@ -19,20 +19,31 @@ export function Skills() {
           className="flex flex-wrap gap-3 sm:gap-3.5"
         >
           {portfolioData.skills.map((skill, index) => (
-            <div
+            <motion.div
               key={skill.name}
-              style={{ animationDelay: `${index * 0.02}s` }}
-              className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#222226] text-sm font-medium text-[#37352f] dark:text-neutral-200 hover:border-neutral-300 dark:hover:border-neutral-700 hover:scale-[1.08] hover:-translate-y-0.5 transition-transform duration-200 shadow-xs cursor-default"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: index * 0.02 }}
+              className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#222226] text-sm font-medium text-[#37352f] dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-[#28282e] hover:border-neutral-300 dark:hover:border-neutral-700 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"
             >
-              {/* Badge Icon Box */}
-              <span
-                className="w-5 h-5 rounded-md flex items-center justify-center text-xs font-bold shadow-xs text-white"
-                style={{ backgroundColor: skill.color || '#3b82f6' }}
-              >
-                {skill.icon}
-              </span>
+              {skill.iconUrl ? (
+                <img 
+                  src={skill.iconUrl} 
+                  alt={skill.name} 
+                  className="w-5 h-5 object-contain" 
+                  aria-hidden="true"
+                />
+              ) : (
+                <span
+                  className="w-5 h-5 rounded-md flex items-center justify-center text-xs font-bold shadow-xs text-white"
+                  style={{ backgroundColor: skill.color || '#3b82f6' }}
+                >
+                  {skill.icon}
+                </span>
+              )}
               <span>{skill.name}</span>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

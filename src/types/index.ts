@@ -14,11 +14,12 @@ export interface ExperienceItem {
   id: string;
   company: string;
   role: string;
-  type: 'Intern' | 'Freelance' | 'Full-time' | 'Contract';
+  type: 'Intern' | 'Freelance' | 'Full-time' | 'Contract' | 'Training';
   period: string;
   location?: string;
   logoBg: string;
   logoText: string;
+  logoUrl?: string;
   description: string[];
   skills: string[];
 }
@@ -26,6 +27,7 @@ export interface ExperienceItem {
 export interface Skill {
   name: string;
   icon: string;
+  iconUrl?: string;
   category: 'languages' | 'frontend' | 'backend' | 'tools' | 'design';
   color?: string;
 }
@@ -34,6 +36,16 @@ export interface ContributionDay {
   date: string;
   count: number;
   level: 0 | 1 | 2 | 3 | 4;
+}
+
+export interface EducationItem {
+  id: string;
+  institution: string;
+  degree: string;
+  period: string;
+  location?: string;
+  logo?: string;
+  description: string;
 }
 
 export interface PortfolioData {
@@ -49,11 +61,12 @@ export interface PortfolioData {
     twitter: string;
     linkedin: string;
     github: string;
-    discord: string;
+    instagram: string;
   };
   githubFollowers: number;
   projects: Project[];
   experiences: ExperienceItem[];
+  education: EducationItem[];
   skills: Skill[];
   bio: {
     intro: string;

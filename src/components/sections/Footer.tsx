@@ -137,13 +137,13 @@ export function Footer() {
 
       {/* Bottom copyright line */}
       <div className="border-t border-neutral-200 dark:border-neutral-800 pt-6 pb-6 text-xs text-[#787774] dark:text-neutral-500">
-        © 2026 Swami Malode
+        © 2026 Mohammed Shaad N
       </div>
 
       {/* Static Giant Watermark Typography (Endless Design) */}
       <div className="mt-8 pt-4 w-full flex justify-center overflow-hidden pointer-events-none select-none">
         <h1 className="text-[35vw] sm:text-[30vw] font-black tracking-[-0.05em] text-neutral-200/60 dark:text-white/[0.04] leading-[0.75] uppercase text-center font-sans whitespace-nowrap">
-          SWAMI
+          SHAAD
         </h1>
       </div>
     </footer>

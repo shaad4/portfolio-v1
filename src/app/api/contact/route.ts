@@ -46,9 +46,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error: any) {
-    console.error('Contact API error:', error);
     return NextResponse.json(
-      { error: 'Internal server error while sending email.' }, 
+      { error: error.message || 'Internal server error while sending email.' }, 
       { status: 500 }
     );
   }

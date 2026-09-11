@@ -16,47 +16,30 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       className="flex flex-col justify-between rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#222226] hover:border-neutral-300 dark:hover:border-neutral-700 hover:shadow-xl transition-[border-color,box-shadow] duration-300 overflow-hidden group p-5 sm:p-6 shadow-sm"
     >
       <div className="space-y-5">
-        {/* Mock Preview Frame */}
-        <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-[#161619] flex flex-col justify-center items-center p-3 group-hover:scale-[1.02] transition-transform duration-300">
-          {/* Header of frame */}
-          <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1 text-[11px] font-mono text-[#787774] dark:text-neutral-400 bg-white/90 dark:bg-[#222226]/90 px-2.5 py-0.5 rounded-full border border-neutral-200 dark:border-neutral-700 shadow-sm">
-            {project.stars !== undefined && (
-              <span className="flex items-center gap-1">
+        {/* Project Preview Image */}
+        <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-[#161619] group-hover:scale-[1.02] transition-transform duration-300">
+          
+          {project.image ? (
+            <img 
+              src={project.image} 
+              alt={`${project.title} cover`} 
+              className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-neutral-400 font-mono text-sm">
+              {project.title.toLowerCase()}.app
+            </div>
+          )}
+
+          {/* Github Stars Badge */}
+          {project.stars !== undefined && (
+            <div className="absolute top-3 right-3 z-10 flex items-center gap-1 text-[11px] font-mono text-[#787774] dark:text-neutral-400 bg-white/90 dark:bg-[#222226]/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-neutral-200 dark:border-neutral-700 shadow-sm">
+              <span className="flex items-center gap-1 font-medium">
                 <GithubIcon className="w-3.5 h-3.5" />
                 {project.stars}
               </span>
-            )}
-          </div>
-
-          {/* Styled UI Mockup inside card preview */}
-          <div className="w-full h-full rounded-lg border border-neutral-300/60 dark:border-neutral-700/60 bg-white/80 dark:bg-[#222226]/80 p-3 flex flex-col justify-between text-xs font-mono text-[#787774] dark:text-neutral-400">
-            <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-2">
-              <div className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-              </div>
-              <span className="text-[10px] text-[#787774] dark:text-neutral-400">{project.title.toLowerCase()}.app</span>
             </div>
-
-            <div className="my-auto text-center space-y-1.5 py-3">
-              <span className="font-bold text-[#37352f] dark:text-white text-base sm:text-lg tracking-tight">
-                {project.title}
-              </span>
-              <p className="text-[11px] text-[#787774] dark:text-neutral-400 line-clamp-2">{project.description}</p>
-            </div>
-
-            <div className="flex justify-center gap-1.5">
-              {project.tags.slice(0, 3).map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[10px] px-2 py-0.5 rounded-md bg-neutral-200/80 dark:bg-neutral-800/80 text-[#37352f] dark:text-neutral-200 font-medium"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+          )}
         </div>
 
         {/* Info header */}
