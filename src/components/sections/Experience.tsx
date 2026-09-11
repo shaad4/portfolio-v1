@@ -8,9 +8,7 @@ import { ChevronDown } from 'lucide-react';
 const SPRING = { type: 'spring', stiffness: 340, damping: 28 } as const;
 
 export function Experience() {
-  const [expandedId, setExpandedId] = useState<string | null>(
-    portfolioData.experiences[0]?.id ?? null,
-  );
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const toggleExpand = (id: string) => {
     setExpandedId(expandedId === id ? null : id);

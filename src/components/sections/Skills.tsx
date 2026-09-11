@@ -16,7 +16,7 @@ export function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
-          className="flex flex-wrap gap-3 sm:gap-3.5"
+          className="flex flex-wrap gap-2 sm:gap-3"
         >
           {portfolioData.skills.map((skill, index) => (
             <motion.div
@@ -25,24 +25,24 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: index * 0.02 }}
-              className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#222226] text-sm font-medium text-[#37352f] dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-[#28282e] hover:border-neutral-300 dark:hover:border-neutral-700 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"
+              className="flex items-center gap-1.5 sm:gap-2.5 px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-lg sm:rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#222226] text-xs sm:text-sm font-medium text-[#37352f] dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-[#28282e] hover:border-neutral-300 dark:hover:border-neutral-700 hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default"
             >
               {skill.iconUrl ? (
-                <img 
-                  src={skill.iconUrl} 
-                  alt={skill.name} 
-                  className="w-5 h-5 object-contain" 
+                <img
+                  src={skill.iconUrl}
+                  alt={skill.name}
+                  className="w-3.5 h-3.5 sm:w-5 sm:h-5 object-contain flex-shrink-0"
                   aria-hidden="true"
                 />
               ) : (
                 <span
-                  className="w-5 h-5 rounded-md flex items-center justify-center text-xs font-bold shadow-xs text-white"
+                  className="w-3.5 h-3.5 sm:w-5 sm:h-5 rounded flex-shrink-0 flex items-center justify-center text-[10px] sm:text-xs font-bold text-white"
                   style={{ backgroundColor: skill.color || '#3b82f6' }}
                 >
                   {skill.icon}
                 </span>
               )}
-              <span>{skill.name}</span>
+              <span className="leading-none">{skill.name}</span>
             </motion.div>
           ))}
         </motion.div>

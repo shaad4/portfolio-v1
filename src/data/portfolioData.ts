@@ -423,20 +423,20 @@ export const portfolioData: PortfolioData = {
   // ABOUT
   bio: {
     intro:
-      "Hey, I'm Shaad a Full-Stack Developer who turns messy problems into software that actually holds up in production.",
+      "Hey, I'm Shaad  a Full-Stack Developer who turns real problems into simple, reliable software.",
 
     details:
-      "My focus is the backend: Python, Django, FastAPI, REST APIs, microservices, and the databases and distributed systems that hold it all together. I like taking systems apart to see how they really work, then rebuilding that thinking into products that solve real problems not toy demos.",
+      "I enjoy building with Python, Django, FastAPI, React, and databases, while constantly learning how to build better systems.",
 
     currentBuilding: {
       name: 'Backend & Distributed Systems',
       description:
-        "Right now I'm going deeper on backend engineering FastAPI, SQLAlchemy, async programming, authentication, middleware, background tasks, database architecture, performance tuning, and microservices at scale.",
+        "Exploring backend engineering, system design, and scalable applications.",
       url: 'https://github.com/shaad4',
     },
 
     closing:
-      "Always building, always learning and actively looking for a team where I can solve problems that matter and grow fast as an engineer. Let's talk.",
+      "Always building. Always learning. Open to interesting problems and opportunities.",
   },
 
   // FOOTER
