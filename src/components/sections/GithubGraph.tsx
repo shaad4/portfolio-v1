@@ -91,7 +91,9 @@ export function GithubGraph() {
     : [];
 
   const monthLabels = visibleWeeks.length ? getMonthLabels(visibleWeeks) : [];
-  const currentYear = data?.weeks?.[0]?.days?.[0]?.date?.slice(0, 4) ?? new Date().getFullYear();
+  const latestWeek = data?.weeks?.[data.weeks.length - 1];
+  const latestDay = latestWeek?.days?.[latestWeek.days.length - 1];
+  const currentYear = latestDay?.date?.slice(0, 4) ?? new Date().getFullYear().toString();
 
   // Contribution count in visible range
   const visibleContributions = visibleWeeks

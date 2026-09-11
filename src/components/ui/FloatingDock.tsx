@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState, useCallback, createContext, useContext } from 'react';
+import { flushSync } from 'react-dom';
 import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { portfolioData } from '@/data/portfolioData';
@@ -18,7 +19,9 @@ function performThemeTransition(
   // Use the View Transitions API for a smooth, content-blended crossfade
   if (typeof document !== 'undefined' && 'startViewTransition' in document) {
     (document as any).startViewTransition(() => {
-      setTheme(nextTheme);
+      flushSync(() => {
+        setTheme(nextTheme);
+      });
     });
   } else {
     // Graceful fallback for browsers without View Transitions support
@@ -140,7 +143,7 @@ export function FloatingDock() {
   ];
 
   return (
-    <div className="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto">
+    <div className="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 pointer-events-auto" style={{ viewTransitionName: 'none' }}>
       <motion.div
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
