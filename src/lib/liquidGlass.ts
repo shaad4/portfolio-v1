@@ -2,7 +2,8 @@
 
 /**
  * liquid-glass.ts — Apple-style liquid glass refraction for web elements.
- * Grounded in https://github.com/deepika-builds/liquid-glass
+ * Supports SVG displacement refraction on desktop Chromium, and high-performance
+ * liquid frosted glass on Mobile & Safari/Firefox.
  */
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -21,6 +22,23 @@ function ensureDefs(): SVGDefsElement {
   svg.appendChild(svgDefs);
   document.body.appendChild(svg);
   return svgDefs;
+}
+
+// Detect whether SVG filter in backdrop-filter is fully supported by browser
+function checkSVGBackdropSupport(): boolean {
+  if (typeof window === 'undefined' || typeof CSS === 'undefined') return false;
+  const ua = navigator.userAgent;
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+  const isSafari = /Safari/.test(ua) && !/Chrome|Chromium|Edg/.test(ua);
+  const isFirefox = /Firefox/.test(ua);
+
+  // Safari, Mobile Safari/Chrome iOS, Firefox do not support SVG filter inside backdrop-filter
+  if (isMobile || isSafari || isFirefox) return false;
+
+  return (
+    (CSS.supports && CSS.supports('backdrop-filter', 'url(#test)')) ||
+    (CSS.supports && CSS.supports('-webkit-backdrop-filter', 'url(#test)'))
+  );
 }
 
 export interface LiquidGlassOptions {
@@ -46,20 +64,25 @@ export function applyLiquidGlass(el: HTMLElement, options: LiquidGlassOptions = 
     radius = null,
   } = options;
 
+  const supportsSVG = checkSVGBackdropSupport();
   const filterId = `lg-filter-${++uid}`;
-  const defs = ensureDefs();
+  const defs = supportsSVG ? ensureDefs() : null;
 
-  const filterEl = document.createElementNS(SVG_NS, 'filter');
-  filterEl.setAttribute('id', filterId);
-  filterEl.setAttribute('x', '-20%');
-  filterEl.setAttribute('y', '-20%');
-  filterEl.setAttribute('width', '140%');
-  filterEl.setAttribute('height', '140%');
-  filterEl.setAttribute('color-interpolation-filters', 'sRGB');
-
-  defs.appendChild(filterEl);
+  let filterEl: SVGFilterElement | null = null;
+  if (supportsSVG && defs) {
+    filterEl = document.createElementNS(SVG_NS, 'filter');
+    filterEl.setAttribute('id', filterId);
+    filterEl.setAttribute('x', '-20%');
+    filterEl.setAttribute('y', '-20%');
+    filterEl.setAttribute('width', '140%');
+    filterEl.setAttribute('height', '140%');
+    filterEl.setAttribute('color-interpolation-filters', 'sRGB');
+    defs.appendChild(filterEl);
+  }
 
   function updateMap() {
+    if (!supportsSVG || !filterEl) return;
+
     const rect = el.getBoundingClientRect();
     const w = Math.max(1, Math.round(rect.width));
     const h = Math.max(1, Math.round(rect.height));
@@ -127,8 +150,11 @@ export function applyLiquidGlass(el: HTMLElement, options: LiquidGlassOptions = 
     }
   }
 
-  // Cursor glare position handler
+  // Pointer glare position handler (only on desktop hover devices)
+  const isHoverDevice = typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches;
+
   function handlePointerMove(e: PointerEvent) {
+    if (!isHoverDevice) return;
     const rect = el.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
@@ -136,12 +162,20 @@ export function applyLiquidGlass(el: HTMLElement, options: LiquidGlassOptions = 
     el.style.setProperty('--gy', `${y.toFixed(1)}%`);
   }
 
-  updateMap();
+  if (supportsSVG) {
+    updateMap();
+    el.style.backdropFilter = `url(#${filterId}) blur(${blur}px) saturate(${saturate})`;
+    (el.style as any).webkitBackdropFilter = `url(#${filterId}) blur(${blur}px) saturate(${saturate})`;
+  } else {
+    // Mobile / Safari / Firefox high-density frosted liquid glass fallback
+    const mobileBlur = Math.max(20, blur * 6);
+    el.style.backdropFilter = `blur(${mobileBlur}px) saturate(${saturate})`;
+    (el.style as any).webkitBackdropFilter = `blur(${mobileBlur}px) saturate(${saturate})`;
+  }
 
-  el.style.backdropFilter = `url(#${filterId}) blur(${blur}px) saturate(${saturate})`;
-  (el.style as any).webkitBackdropFilter = `url(#${filterId}) blur(${blur}px) saturate(${saturate})`;
-
-  el.addEventListener('pointermove', handlePointerMove);
+  if (isHoverDevice) {
+    el.addEventListener('pointermove', handlePointerMove);
+  }
 
   const ro = new ResizeObserver(() => updateMap());
   ro.observe(el);
@@ -150,8 +184,12 @@ export function applyLiquidGlass(el: HTMLElement, options: LiquidGlassOptions = 
     refresh: updateMap,
     destroy: () => {
       ro.disconnect();
-      el.removeEventListener('pointermove', handlePointerMove);
-      if (filterEl.parentNode) filterEl.parentNode.removeChild(filterEl);
+      if (isHoverDevice) {
+        el.removeEventListener('pointermove', handlePointerMove);
+      }
+      if (filterEl && filterEl.parentNode) {
+        filterEl.parentNode.removeChild(filterEl);
+      }
     },
   };
 }
