@@ -70,7 +70,7 @@ function DockIcon({
       ref={ref}
       style={{ width, height: width, y }}
       onClick={onClick}
-      className="relative group flex items-center justify-center rounded-full bg-[#1c1c20]/80 dark:bg-[#161619]/80 text-white backdrop-blur-md border border-white/20 hover:border-white/40 hover:bg-[#28282e] transition-all duration-200 shadow-[inset_0_1px_1px_rgba(255,255,255,0.35),0_4px_12px_rgba(0,0,0,0.25)] cursor-pointer select-none"
+      className="relative group flex items-center justify-center rounded-full bg-neutral-900/65 dark:bg-white/10 text-white backdrop-blur-md border border-white/20 dark:border-white/15 hover:bg-neutral-900/85 dark:hover:bg-white/20 transition-all duration-200 shadow-[inset_0_1px_1px_rgba(255,255,255,0.35),0_4px_12px_rgba(0,0,0,0.25)] cursor-pointer select-none"
       aria-label={name}
     >
       <motion.div style={{ scale: iconScale }} className="flex items-center justify-center">
@@ -166,7 +166,7 @@ export function FloatingDock() {
         initial={{ y: 60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-        className="flex items-end gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-gradient-to-b from-white/20 via-white/10 to-white/5 dark:from-white/15 dark:via-white/5 dark:to-black/30 border border-white/40 dark:border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.4),inset_0_1px_1.5px_rgba(255,255,255,0.6),inset_0_-8px_20px_rgba(255,255,255,0.06),inset_0_0_0_1px_rgba(255,255,255,0.18)] will-change-transform scale-[0.85] sm:scale-100 origin-bottom"
+        className="flex items-end gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-neutral-950/30 dark:bg-black/35 backdrop-blur-3xl border border-white/30 dark:border-white/15 shadow-[0_24px_60px_rgba(0,0,0,0.3)] ring-1 ring-black/10 dark:ring-white/10 will-change-transform scale-[0.85] sm:scale-100 origin-bottom"
       >
         {/* Social Links */}
         {socials.map((social) => (
@@ -207,7 +207,7 @@ export function FloatingDock() {
             onClick={handleThemeToggle}
           />
         ) : (
-          <div className="w-11 h-11 rounded-full bg-[#1e1e22]/80" />
+          <div className="w-11 h-11 rounded-full bg-neutral-900/65 dark:bg-white/10" />
         )}
       </motion.div>
     </div>
