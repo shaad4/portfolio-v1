@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { portfolioData } from '@/data/portfolioData';
 import { ArrowUpRight } from 'lucide-react';
 
-const SPRING = { type: 'spring', stiffness: 340, damping: 28 };
+const SPRING = { type: 'spring', stiffness: 340, damping: 28 } as const;
 
 export function About() {
   const { bio } = portfolioData;

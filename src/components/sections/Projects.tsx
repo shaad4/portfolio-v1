@@ -6,7 +6,7 @@ import { Project } from '@/types';
 import { GithubIcon } from '@/components/ui/Icons';
 import { ArrowUpRight } from 'lucide-react';
 
-const SPRING = { type: 'spring', stiffness: 340, damping: 28 };
+const SPRING = { type: 'spring', stiffness: 340, damping: 28 } as const;
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (

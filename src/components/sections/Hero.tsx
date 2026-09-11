@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { portfolioData } from '@/data/portfolioData';
 
-const SPRING = { type: 'spring', stiffness: 380, damping: 30 };
+const SPRING = { type: 'spring', stiffness: 380, damping: 30 } as const;
 const EASE_OUT = { duration: 0.6, ease: [0.16, 1, 0.3, 1] };
 
 /** X.com (Twitter) Blue Verified Badge */

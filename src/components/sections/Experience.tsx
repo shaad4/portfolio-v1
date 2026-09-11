@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '@/data/portfolioData';
 import { ChevronDown } from 'lucide-react';
 
-const SPRING = { type: 'spring', stiffness: 340, damping: 28 };
+const SPRING = { type: 'spring', stiffness: 340, damping: 28 } as const;
 
 export function Experience() {
   const [expandedId, setExpandedId] = useState<string | null>(

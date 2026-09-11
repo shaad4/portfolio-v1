@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { portfolioData } from '@/data/portfolioData';
 import { Copy, Check, ArrowUpRight } from 'lucide-react';
 
-const SPRING = { type: 'spring', stiffness: 340, damping: 28 };
+const SPRING = { type: 'spring', stiffness: 340, damping: 28 } as const;
 
 export function Footer() {
   const [copied, setCopied] = useState(false);
