@@ -19,7 +19,7 @@ export function Footer() {
   return (
     <footer
       id="connect"
-      className="relative pt-16 pb-0 px-6 sm:px-10 md:px-14 max-w-[1600px] mx-auto border-t border-neutral-200 dark:border-neutral-800 text-xs sm:text-sm font-mono w-full overflow-hidden"
+      className="relative pt-16 pb-0 px-4 sm:px-8 md:px-10 max-w-[1760px] mx-auto border-t border-neutral-200 dark:border-neutral-800 text-xs sm:text-sm font-mono w-full overflow-hidden"
     >
       {/* Quick outbound links */}
       <motion.div

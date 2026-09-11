@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 export function Header() {
   return (
     <header className="w-full border-b border-neutral-200/80 dark:border-neutral-800/80 bg-white/70 dark:bg-neutral-950/70 backdrop-blur-xl sticky top-0 z-40">
-      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 md:px-14 h-20 flex items-center justify-between">
+      <div className="max-w-[1760px] mx-auto px-4 sm:px-8 md:px-10 h-20 flex items-center justify-between">
         {/* Brand logo */}
         <motion.a
           href="#"

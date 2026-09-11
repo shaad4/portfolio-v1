@@ -28,7 +28,7 @@ const item = {
 
 export function Hero() {
   return (
-    <section className="pt-16 sm:pt-24 pb-20 px-6 sm:px-10 md:px-14 max-w-[1600px] mx-auto w-full">
+    <section className="pt-16 sm:pt-24 pb-20 px-4 sm:px-8 md:px-10 max-w-[1760px] mx-auto w-full">
       <motion.div
         variants={container}
         initial="hidden"
