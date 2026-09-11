@@ -2,7 +2,7 @@
 
 /**
  * liquid-glass.ts — Apple-style liquid glass refraction for web elements.
- * Provides displacement refraction in Chromium and elegant frosted glass in Safari/Firefox.
+ * Grounded in https://github.com/deepika-builds/liquid-glass
  */
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -24,25 +24,25 @@ function ensureDefs(): SVGDefsElement {
 }
 
 export interface LiquidGlassOptions {
-  scale?: number;      // displacement strength (negative = magnifying bulge)
-  chroma?: number;     // chromatic aberration / prism fringe
+  scale?: number;      // displacement strength (−60 subtle ... −180 dramatic)
+  chroma?: number;     // per-channel scale stagger (prism fringe)
   border?: number;     // neutral interior inset fraction
   mapBlur?: number;    // map blur radius for rim curvature
   blur?: number;       // backdrop blur in px
-  saturate?: number;   // saturation multiplier
-  radius?: number;     // corner radius (autodetected if omitted)
+  saturate?: number;   // saturation boost
+  radius?: number;     // corner radius
 }
 
 export function applyLiquidGlass(el: HTMLElement, options: LiquidGlassOptions = {}) {
-  if (typeof window === 'undefined' || !el) return { destroy: () => {} };
+  if (typeof window === 'undefined' || !el) return { refresh: () => {}, destroy: () => {} };
 
   const {
-    scale = -65,
-    chroma = 3,
-    border = 0.12,
-    mapBlur = 20,
-    blur = 10,
-    saturate = 1.3,
+    scale = -112,
+    chroma = 6,
+    border = 0.07,
+    mapBlur = 12,
+    blur = 3,
+    saturate = 1.5,
     radius = null,
   } = options;
 
@@ -59,7 +59,7 @@ export function applyLiquidGlass(el: HTMLElement, options: LiquidGlassOptions = 
 
   defs.appendChild(filterEl);
 
-  function update() {
+  function updateMap() {
     const rect = el.getBoundingClientRect();
     const w = Math.max(1, Math.round(rect.width));
     const h = Math.max(1, Math.round(rect.height));
@@ -70,19 +70,20 @@ export function applyLiquidGlass(el: HTMLElement, options: LiquidGlassOptions = 
       computedRadius = parseFloat(cs.borderRadius) || Math.min(w, h) / 2;
     }
 
-    // Build displacement canvas
     const canvas = document.createElement('canvas');
     canvas.width = w;
     canvas.height = h;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Red ramp X
     const gx = ctx.createLinearGradient(0, 0, w, 0);
     gx.addColorStop(0, 'rgb(0,0,0)');
     gx.addColorStop(1, 'rgb(255,0,0)');
     ctx.fillStyle = gx;
     ctx.fillRect(0, 0, w, h);
 
+    // Blue ramp Y (difference)
     const gy = ctx.createLinearGradient(0, 0, 0, h);
     gy.addColorStop(0, 'rgb(0,0,0)');
     gy.addColorStop(1, 'rgb(0,0,255)');
@@ -90,6 +91,7 @@ export function applyLiquidGlass(el: HTMLElement, options: LiquidGlassOptions = 
     ctx.fillStyle = gy;
     ctx.fillRect(0, 0, w, h);
 
+    // Neutral gray interior inset
     ctx.globalCompositeOperation = 'source-over';
     const inset = border * Math.min(w, h);
     ctx.filter = `blur(${mapBlur}px)`;
@@ -103,11 +105,11 @@ export function applyLiquidGlass(el: HTMLElement, options: LiquidGlassOptions = 
     }
     ctx.fill();
 
-    const mapDataUrl = canvas.toDataURL();
+    const mapUrl = canvas.toDataURL();
 
     if (chroma !== 0) {
       filterEl.innerHTML = `
-        <feImage href="${mapDataUrl}" result="map" preserveAspectRatio="none"/>
+        <feImage href="${mapUrl}" result="map" preserveAspectRatio="none"/>
         <feDisplacementMap in="SourceGraphic" in2="map" scale="${scale}" xChannelSelector="R" yChannelSelector="B" result="dispR"/>
         <feDisplacementMap in="SourceGraphic" in2="map" scale="${scale + chroma}" xChannelSelector="R" yChannelSelector="B" result="dispG"/>
         <feDisplacementMap in="SourceGraphic" in2="map" scale="${scale + chroma * 2}" xChannelSelector="R" yChannelSelector="B" result="dispB"/>
@@ -119,25 +121,36 @@ export function applyLiquidGlass(el: HTMLElement, options: LiquidGlassOptions = 
       `;
     } else {
       filterEl.innerHTML = `
-        <feImage href="${mapDataUrl}" result="map" preserveAspectRatio="none"/>
+        <feImage href="${mapUrl}" result="map" preserveAspectRatio="none"/>
         <feDisplacementMap in="SourceGraphic" in2="map" scale="${scale}" xChannelSelector="R" yChannelSelector="B" result="dispOut"/>
       `;
     }
   }
 
-  update();
+  // Cursor glare position handler
+  function handlePointerMove(e: PointerEvent) {
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    el.style.setProperty('--gx', `${x.toFixed(1)}%`);
+    el.style.setProperty('--gy', `${y.toFixed(1)}%`);
+  }
 
-  // Apply backdrop-filter url(#id) with fallbacks
+  updateMap();
+
   el.style.backdropFilter = `url(#${filterId}) blur(${blur}px) saturate(${saturate})`;
   (el.style as any).webkitBackdropFilter = `url(#${filterId}) blur(${blur}px) saturate(${saturate})`;
 
-  const ro = new ResizeObserver(() => update());
+  el.addEventListener('pointermove', handlePointerMove);
+
+  const ro = new ResizeObserver(() => updateMap());
   ro.observe(el);
 
   return {
-    update,
+    refresh: updateMap,
     destroy: () => {
       ro.disconnect();
+      el.removeEventListener('pointermove', handlePointerMove);
       if (filterEl.parentNode) filterEl.parentNode.removeChild(filterEl);
     },
   };

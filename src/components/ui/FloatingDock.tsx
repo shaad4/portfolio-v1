@@ -55,7 +55,7 @@ function DockIcon({
     return val - bounds.x - bounds.width / 2;
   });
 
-  // Fluid spring configuration
+  // Fluid magnification spring
   const widthSync = useTransform(distance, [-160, 0, 160], [44, 76, 44]);
   const width = useSpring(widthSync, { mass: 0.08, stiffness: 180, damping: 12 });
 
@@ -70,7 +70,7 @@ function DockIcon({
       ref={ref}
       style={{ width, height: width, y }}
       onClick={onClick}
-      className="relative group flex items-center justify-center rounded-full bg-neutral-900/65 dark:bg-white/10 text-white backdrop-blur-md border border-white/20 dark:border-white/15 hover:bg-neutral-900/85 dark:hover:bg-white/20 transition-all duration-200 shadow-[inset_0_1px_1px_rgba(255,255,255,0.35),0_4px_12px_rgba(0,0,0,0.25)] cursor-pointer select-none"
+      className="relative group flex items-center justify-center rounded-full bg-neutral-900/15 hover:bg-neutral-900/25 text-neutral-900 border border-white/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] dark:bg-white/10 dark:hover:bg-white/20 dark:text-white dark:border-white/15 dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all duration-200 cursor-pointer select-none"
       aria-label={name}
     >
       <motion.div style={{ scale: iconScale }} className="flex items-center justify-center">
@@ -109,16 +109,16 @@ export function FloatingDock() {
     setMounted(true);
   }, []);
 
-  // Initialize liquid glass optics effect
+  // Initialize liquid glass optics effect (deepika-builds/liquid-glass)
   useEffect(() => {
     if (dockRef.current) {
       const glass = applyLiquidGlass(dockRef.current, {
-        scale: -60,
-        chroma: 3,
-        border: 0.12,
-        mapBlur: 20,
-        blur: 8,
-        saturate: 1.3,
+        scale: -112,
+        chroma: 6,
+        border: 0.07,
+        mapBlur: 12,
+        blur: 3,
+        saturate: 1.5,
       });
       return () => glass?.destroy();
     }
@@ -166,8 +166,16 @@ export function FloatingDock() {
         initial={{ y: 60, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-        className="flex items-end gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full bg-neutral-950/30 dark:bg-black/35 backdrop-blur-3xl border border-white/30 dark:border-white/15 shadow-[0_24px_60px_rgba(0,0,0,0.3)] ring-1 ring-black/10 dark:ring-white/10 will-change-transform scale-[0.85] sm:scale-100 origin-bottom"
+        className="relative flex items-end gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.45),rgba(255,255,255,0.22))] dark:bg-[linear-gradient(180deg,rgba(18,18,24,0.35),rgba(10,10,15,0.5))] shadow-[0_24px_60px_rgba(0,0,0,0.18),inset_0_1px_1px_rgba(255,255,255,0.8),inset_0_-8px_20px_rgba(255,255,255,0.2),inset_0_0_0_1px_rgba(255,255,255,0.45)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.55),inset_0_1px_1px_rgba(255,255,255,0.4),inset_0_-8px_20px_rgba(255,255,255,0.05),inset_0_0_0_1px_rgba(255,255,255,0.14)] will-change-transform scale-[0.85] sm:scale-100 origin-bottom"
       >
+        {/* Dynamic Cursor-Tracked Glare Overlay */}
+        <div
+          className="absolute inset-0 rounded-full pointer-events-none transition-opacity duration-300"
+          style={{
+            background: 'radial-gradient(180px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.04) 45%, transparent 70%)',
+          }}
+        />
+
         {/* Social Links */}
         {socials.map((social) => (
           <DockIcon
@@ -179,7 +187,7 @@ export function FloatingDock() {
           />
         ))}
 
-        <div className="w-[1px] h-7 bg-white/25 mx-1 self-center" />
+        <div className="w-[1px] h-7 bg-neutral-900/15 dark:bg-white/20 mx-1 self-center" />
 
         {/* Theme Switcher */}
         {mounted ? (
@@ -207,7 +215,7 @@ export function FloatingDock() {
             onClick={handleThemeToggle}
           />
         ) : (
-          <div className="w-11 h-11 rounded-full bg-neutral-900/65 dark:bg-white/10" />
+          <div className="w-11 h-11 rounded-full bg-neutral-900/15 dark:bg-white/10" />
         )}
       </motion.div>
     </div>
