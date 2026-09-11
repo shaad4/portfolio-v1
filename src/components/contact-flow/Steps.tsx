@@ -51,7 +51,7 @@ export function StepName({ data, updateData, nextStep }: StepProps) {
 
   return (
     <motion.div variants={variants} initial="initial" animate="animate" exit="exit" transition={transition} className="flex flex-col gap-8 w-full max-w-2xl">
-      <CinematicHeading className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight">👋Hey! What&apos;s your name?</CinematicHeading>
+      <CinematicHeading className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight">👋 Hey! What&apos;s your name?</CinematicHeading>
       <div className="flex flex-col gap-3">
         <div className="relative w-full">
           <input
@@ -61,11 +61,11 @@ export function StepName({ data, updateData, nextStep }: StepProps) {
             onChange={(e) => updateData({ name: e.target.value })}
             onKeyDown={handleKeyDown}
             placeholder="Type your name..."
-            className="bg-transparent border-b-2 border-neutral-200 dark:border-neutral-800 focus:border-neutral-800 dark:focus:border-neutral-200 text-2xl sm:text-3xl outline-none py-2 pr-14 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 transition-colors w-full"
+            className="bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 text-2xl sm:text-3xl py-3 pr-14 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 transition-colors w-full"
           />
           <button
             onClick={handleNext}
-            className="absolute right-0 bottom-2.5 p-2.5 rounded-full bg-[#151515] dark:bg-white text-white dark:text-black hover:scale-105 active:scale-95 transition-all shadow-md z-10"
+            className="absolute right-0 bottom-3 p-2.5 rounded-full bg-[#151515] dark:bg-white text-white dark:text-black hover:scale-105 active:scale-95 transition-all shadow-md z-10 outline-none focus:outline-none focus-visible:outline-none"
             aria-label="Next step"
           >
             <Send className="w-4 h-4 sm:w-5 sm:h-5 ml-[2px] mt-[1px]" />
@@ -93,7 +93,6 @@ export function StepReason({ data, updateData, nextStep }: StepProps) {
   const handleSelect = (reason: string) => {
     updateData({ reason });
     setError('');
-    // Slight delay for visual feedback before auto-advancing
     setTimeout(() => {
       nextStep();
     }, 250);
@@ -102,25 +101,26 @@ export function StepReason({ data, updateData, nextStep }: StepProps) {
   return (
     <motion.div variants={variants} initial="initial" animate="animate" exit="exit" transition={transition} className="flex flex-col gap-8 w-full max-w-2xl">
       <CinematicHeading className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight leading-tight">
-        Nice to meet you, <span className="text-neutral-500 dark:text-neutral-400">{data.name}</span>! So... what brings you here?
+        Nice to meet you, <span className="text-[#787774] dark:text-neutral-400">{data.name}</span>! So... what brings you here?
       </CinematicHeading>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="flex flex-col sm:grid sm:grid-cols-2 gap-3">
         {REASONS.map((r, i) => (
           <motion.button
             key={r}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 + i * 0.05 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.35, delay: 0.15 + i * 0.05 }}
+            whileHover={{ scale: 1.015, x: 2 }}
+            whileTap={{ scale: 0.985 }}
             onClick={() => handleSelect(r)}
-            className={`p-6 text-left rounded-2xl border transition-all duration-300 text-lg shadow-sm hover:shadow-md ${
+            className={`p-4 sm:p-5 text-left rounded-xl transition-all duration-200 text-base sm:text-lg flex items-center justify-between font-medium outline-none focus:outline-none focus-visible:outline-none ${
               data.reason === r
-                ? 'border-neutral-800 dark:border-neutral-200 bg-neutral-50 dark:bg-neutral-800/50 ring-1 ring-neutral-800 dark:ring-neutral-200'
-                : 'border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 bg-white/40 dark:bg-[#151515]/40 backdrop-blur-sm'
+                ? 'bg-[#37352f] dark:bg-white text-white dark:text-black font-semibold'
+                : 'bg-neutral-100/70 dark:bg-neutral-800/50 text-[#37352f] dark:text-neutral-200 hover:bg-neutral-200/70 dark:hover:bg-neutral-800/80'
             }`}
           >
-            {r}
+            <span>{r}</span>
+            <span className="text-xs opacity-60">→</span>
           </motion.button>
         ))}
       </div>
@@ -158,7 +158,7 @@ export function StepEmail({ data, updateData, nextStep }: StepProps) {
     <motion.div variants={variants} initial="initial" animate="animate" exit="exit" transition={transition} className="flex flex-col gap-8 w-full max-w-2xl">
       <div className="flex flex-col gap-2">
         <CinematicHeading className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight">Nice! How can I reach you?</CinematicHeading>
-        <p className="text-neutral-500 dark:text-neutral-400 text-lg">I promise I won&apos;t send you random spam.</p>
+        <p className="text-[#787774] dark:text-neutral-400 text-lg">I promise I won&apos;t send you random spam.</p>
       </div>
       <div className="flex flex-col gap-3">
         <div className="relative w-full">
@@ -169,11 +169,11 @@ export function StepEmail({ data, updateData, nextStep }: StepProps) {
             onChange={(e) => updateData({ email: e.target.value })}
             onKeyDown={handleKeyDown}
             placeholder="your@email.com"
-            className="bg-transparent border-b-2 border-neutral-200 dark:border-neutral-800 focus:border-neutral-800 dark:focus:border-neutral-200 text-2xl sm:text-3xl outline-none py-2 pr-14 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 transition-colors w-full"
+            className="bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 text-2xl sm:text-3xl py-3 pr-14 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 transition-colors w-full"
           />
           <button
             onClick={handleNext}
-            className="absolute right-0 bottom-2.5 p-2.5 rounded-full bg-[#151515] dark:bg-white text-white dark:text-black hover:scale-105 active:scale-95 transition-all shadow-md z-10"
+            className="absolute right-0 bottom-3 p-2.5 rounded-full bg-[#151515] dark:bg-white text-white dark:text-black hover:scale-105 active:scale-95 transition-all shadow-md z-10 outline-none focus:outline-none focus-visible:outline-none"
             aria-label="Next step"
           >
             <Send className="w-4 h-4 sm:w-5 sm:h-5 ml-[2px] mt-[1px]" />
@@ -209,7 +209,6 @@ export function StepMessage({ data, updateData, nextStep }: StepProps) {
     nextStep();
   };
 
-  // Only advance on Cmd/Ctrl+Enter to allow newlines
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
       handleNext();
@@ -220,7 +219,7 @@ export function StepMessage({ data, updateData, nextStep }: StepProps) {
     <motion.div variants={variants} initial="initial" animate="animate" exit="exit" transition={transition} className="flex flex-col gap-8 w-full max-w-2xl">
       <div className="flex flex-col gap-2">
         <CinematicHeading className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight">Tell me a little about it.</CinematicHeading>
-        <p className="text-neutral-500 dark:text-neutral-400 text-lg">No need to write a formal essay.</p>
+        <p className="text-[#787774] dark:text-neutral-400 text-lg">No need to write a formal essay.</p>
       </div>
       <div className="flex flex-col gap-3">
         <div className="relative w-full">
@@ -231,11 +230,11 @@ export function StepMessage({ data, updateData, nextStep }: StepProps) {
             onKeyDown={handleKeyDown}
             placeholder="What's on your mind?..."
             rows={4}
-            className="bg-transparent border-b-2 border-neutral-200 dark:border-neutral-800 focus:border-neutral-800 dark:focus:border-neutral-200 text-xl sm:text-2xl outline-none py-2 pr-14 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 transition-colors w-full resize-none"
+            className="bg-transparent border-none outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 text-xl sm:text-2xl py-3 pr-14 placeholder:text-neutral-400 dark:placeholder:text-neutral-600 transition-colors w-full resize-none"
           />
           <button
             onClick={handleNext}
-            className="absolute right-0 bottom-4 p-2.5 rounded-full bg-[#151515] dark:bg-white text-white dark:text-black hover:scale-105 active:scale-95 transition-all shadow-md z-10"
+            className="absolute right-0 bottom-4 p-2.5 rounded-full bg-[#151515] dark:bg-white text-white dark:text-black hover:scale-105 active:scale-95 transition-all shadow-md z-10 outline-none focus:outline-none focus-visible:outline-none"
             aria-label="Next step"
           >
             <Send className="w-4 h-4 sm:w-5 sm:h-5 ml-[2px] mt-[1px]" />
@@ -245,7 +244,7 @@ export function StepMessage({ data, updateData, nextStep }: StepProps) {
           {error ? (
             <span className="text-red-500 text-sm font-medium animate-in fade-in">{error}</span>
           ) : (
-            <span className="text-neutral-400 text-sm">Press Cmd/Ctrl + Enter to continue</span>
+            <span className="text-neutral-400 text-sm font-mono">Press Cmd/Ctrl + Enter to continue</span>
           )}
         </div>
       </div>
@@ -253,10 +252,8 @@ export function StepMessage({ data, updateData, nextStep }: StepProps) {
   );
 }
 
-
-
 // ----------------------------------------------------
-// Step 6: Review & Submit
+// Step 5: Review & Submit
 // ----------------------------------------------------
 type StepReviewProps = {
   data: ContactFormData;
@@ -273,20 +270,20 @@ export function StepReview({ data, prevStep, submitForm, isSubmitting, error }: 
       
       <div className="space-y-6 text-lg">
         <div>
-          <span className="text-neutral-400 text-sm uppercase tracking-wider block mb-1">Name</span>
-          <p className="font-medium">{data.name}</p>
+          <span className="text-[#787774] dark:text-neutral-400 text-xs uppercase tracking-wider block mb-1 font-mono">Name</span>
+          <p className="font-medium text-[#37352f] dark:text-white text-xl sm:text-2xl">{data.name}</p>
         </div>
         <div>
-          <span className="text-neutral-400 text-sm uppercase tracking-wider block mb-1">Email</span>
-          <p className="font-medium">{data.email}</p>
+          <span className="text-[#787774] dark:text-neutral-400 text-xs uppercase tracking-wider block mb-1 font-mono">Email</span>
+          <p className="font-medium text-[#37352f] dark:text-white text-xl sm:text-2xl">{data.email}</p>
         </div>
         <div>
-          <span className="text-neutral-400 text-sm uppercase tracking-wider block mb-1">Reason</span>
-          <p className="font-medium">{data.reason}</p>
+          <span className="text-[#787774] dark:text-neutral-400 text-xs uppercase tracking-wider block mb-1 font-mono">Reason</span>
+          <p className="font-medium text-[#37352f] dark:text-white text-xl sm:text-2xl">{data.reason}</p>
         </div>
         <div>
-          <span className="text-neutral-400 text-sm uppercase tracking-wider block mb-1">Message</span>
-          <p className="font-medium line-clamp-3">{data.message}</p>
+          <span className="text-[#787774] dark:text-neutral-400 text-xs uppercase tracking-wider block mb-1 font-mono">Message</span>
+          <p className="font-medium text-[#37352f] dark:text-white text-xl sm:text-2xl line-clamp-3">{data.message}</p>
         </div>
       </div>
 
@@ -300,7 +297,7 @@ export function StepReview({ data, prevStep, submitForm, isSubmitting, error }: 
         <button
           onClick={prevStep}
           disabled={isSubmitting}
-          className="px-6 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-medium hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors disabled:opacity-50"
+          className="px-6 py-3 rounded-xl border border-neutral-200 dark:border-neutral-800 font-medium hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors disabled:opacity-50"
         >
           ← Go back
         </button>

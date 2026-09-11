@@ -160,11 +160,11 @@ export function ContactFlow() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[99999] flex flex-col bg-white/80 dark:bg-[#151515]/80 backdrop-blur-3xl text-[#37352f] dark:text-neutral-200" style={{ height: '100dvh' }}>
+    <div className="fixed inset-0 z-[99999] flex flex-col bg-white/95 dark:bg-[#191919]/95 backdrop-blur-3xl text-[#37352f] dark:text-white" style={{ height: '100dvh' }}>
       {/* Animated Progress Bar */}
       {step < 6 && (
         <motion.div 
-          className="absolute top-0 left-0 h-[2px] bg-black dark:bg-white z-50"
+          className="absolute top-0 left-0 h-[2px] bg-[#37352f] dark:bg-white z-50"
           initial={{ width: 0 }}
           animate={{ width: `${(Math.min(step, 4) / 4) * 100}%` }}
           transition={{ duration: 0.5, ease: "easeInOut" }}

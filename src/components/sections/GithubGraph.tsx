@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface ContributionDay {
@@ -70,6 +70,7 @@ export function GithubGraph() {
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState<ContributionDay | null>(null);
   const isMobile = useIsMobile();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch('/api/github-graph')
@@ -96,6 +97,19 @@ export function GithubGraph() {
   const visibleContributions = visibleWeeks
     .flatMap((w) => w.days)
     .reduce((sum, d) => sum + d.count, 0);
+
+  // Scroll to the end on mobile so recent contributions are immediately visible
+  useEffect(() => {
+    if (isMobile && scrollRef.current) {
+      scrollRef.current.scrollLeft = scrollRef.current.scrollWidth;
+    }
+  }, [isMobile, visibleWeeks]);
+
+  const handleCellClick = (day: ContributionDay) => {
+    if (isMobile) {
+      setHovered((prev) => (prev?.date === day.date ? null : day));
+    }
+  };
 
   return (
     <section id="github-graph" className="py-16 px-4 sm:px-8 md:px-10 max-w-[1760px] mx-auto border-t border-neutral-200 dark:border-neutral-800">
@@ -126,7 +140,7 @@ export function GithubGraph() {
               )}
             </div>
 
-            {/* Hover detail panel */}
+            {/* Hover / Selection detail panel */}
             <AnimatePresence mode="wait">
               {hovered ? (
                 <motion.div
@@ -135,16 +149,27 @@ export function GithubGraph() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -4, scale: 0.95 }}
                   transition={{ duration: 0.15 }}
-                  className="flex-shrink-0 text-right"
+                  className="flex-shrink-0 text-right flex items-center gap-2"
                 >
-                  <p className="text-xs sm:text-sm font-bold text-[#37352f] dark:text-white font-mono">
-                    {hovered.count === 0
-                      ? 'No contributions'
-                      : `${hovered.count} contribution${hovered.count !== 1 ? 's' : ''}`}
-                  </p>
-                  <p className="text-[10px] sm:text-xs font-mono text-[#787774] dark:text-neutral-400 mt-0.5">
-                    {formatDate(hovered.date)}
-                  </p>
+                  <div>
+                    <p className="text-xs sm:text-sm font-bold text-[#37352f] dark:text-white font-mono">
+                      {hovered.count === 0
+                        ? 'No contributions'
+                        : `${hovered.count} contribution${hovered.count !== 1 ? 's' : ''}`}
+                    </p>
+                    <p className="text-[10px] sm:text-xs font-mono text-[#787774] dark:text-neutral-400 mt-0.5">
+                      {formatDate(hovered.date)}
+                    </p>
+                  </div>
+                  {isMobile && (
+                    <button
+                      onClick={() => setHovered(null)}
+                      className="p-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-[#787774] dark:text-neutral-400 hover:text-black dark:hover:text-white text-xs transition-colors"
+                      aria-label="Clear selection"
+                    >
+                      ✕
+                    </button>
+                  )}
                 </motion.div>
               ) : (
                 <motion.p
@@ -153,9 +178,9 @@ export function GithubGraph() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="text-[10px] sm:text-xs font-mono text-[#787774]/60 dark:text-neutral-600 self-center text-right hidden sm:block"
+                  className="text-[10px] sm:text-xs font-mono text-[#787774]/60 dark:text-neutral-600 self-center text-right"
                 >
-                  {data && 'Hover a cell to see details'}
+                  {data && (isMobile ? 'Tap a cell for details' : 'Hover a cell to see details')}
                 </motion.p>
               )}
             </AnimatePresence>
@@ -168,7 +193,7 @@ export function GithubGraph() {
                 {Array.from({ length: (isMobile ? MOBILE_WEEKS : 52) * 7 }).map((_, i) => (
                   <div
                     key={i}
-                    className="w-[calc((100vw-64px)/26/1.2)] sm:w-5 h-[calc((100vw-64px)/26/1.2)] sm:h-5 max-w-5 max-h-5 min-w-3 min-h-3 rounded-md bg-neutral-100 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-700/40 animate-pulse"
+                    className="w-5 h-5 sm:w-5 sm:h-5 rounded-md bg-neutral-100 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-700/40 animate-pulse"
                   />
                 ))}
               </div>
@@ -192,9 +217,17 @@ export function GithubGraph() {
           {/* Heatmap grid */}
           {data && !loading && (
             <div className="w-full">
-              <div className="space-y-2 sm:space-y-3">
+              <div
+                ref={scrollRef}
+                className="overflow-x-auto pb-2 scrollbar-none space-y-2 sm:space-y-3"
+              >
                 {/* Month labels */}
-                <div className="relative h-4 sm:h-5">
+                <div
+                  className="relative h-4 sm:h-5 min-w-max sm:min-w-0"
+                  style={{
+                    width: isMobile ? `${visibleWeeks.length * 23.5}px` : '100%',
+                  }}
+                >
                   {monthLabels.map(({ label, index }) => (
                     <span
                       key={`${label}-${index}`}
@@ -206,25 +239,30 @@ export function GithubGraph() {
                   ))}
                 </div>
 
-                {/* Grid — fluid cells on mobile, fixed 20px on desktop */}
+                {/* Grid — larger scrollable 22px cells on mobile, fluid/fixed on desktop */}
                 <div
-                  className="grid grid-flow-col grid-rows-7 gap-1 sm:gap-2"
+                  className="grid grid-flow-col grid-rows-7 gap-1.5 sm:gap-2 min-w-max sm:min-w-0"
                   style={{
-                    gridTemplateColumns: `repeat(${visibleWeeks.length}, minmax(0, 1fr))`,
+                    gridTemplateColumns: isMobile
+                      ? `repeat(${visibleWeeks.length}, 22px)`
+                      : `repeat(${visibleWeeks.length}, minmax(0, 1fr))`,
                   }}
-                  onMouseLeave={() => setHovered(null)}
-                  onTouchEnd={() => setTimeout(() => setHovered(null), 1200)}
+                  onMouseLeave={() => {
+                    if (!isMobile) setHovered(null);
+                  }}
                 >
                   {visibleWeeks.map((week, wIndex) =>
                     week.days.map((day, dIndex) => (
                       <div
                         key={`${wIndex}-${dIndex}`}
-                        onMouseEnter={() => setHovered(day)}
-                        onTouchStart={() => setHovered(day)}
-                        className={`aspect-square rounded-[3px] sm:rounded-md border transition-all duration-100 cursor-default
+                        onClick={() => handleCellClick(day)}
+                        onMouseEnter={() => {
+                          if (!isMobile) setHovered(day);
+                        }}
+                        className={`w-5.5 h-5.5 sm:w-auto sm:h-auto aspect-square rounded-[4px] sm:rounded-md border transition-all duration-100 cursor-pointer sm:cursor-default
                           ${getLevelColor(day.level)}
                           ${hovered?.date === day.date
-                            ? 'scale-125 ring-1 sm:ring-2 ring-offset-1 ring-neutral-400 dark:ring-neutral-500 dark:ring-offset-[#222226]'
+                            ? 'scale-125 ring-2 ring-offset-1 ring-neutral-400 dark:ring-neutral-500 dark:ring-offset-[#222226] z-10'
                             : 'hover:scale-110'
                           }
                         `}
@@ -232,15 +270,15 @@ export function GithubGraph() {
                     ))
                   )}
                 </div>
+              </div>
 
-                {/* Legend */}
-                <div className="flex items-center justify-end gap-1.5 sm:gap-2 pt-1">
-                  <span className="text-[10px] sm:text-[11px] font-mono text-[#787774] dark:text-neutral-400 mr-1">Less</span>
-                  {[0, 1, 2, 3, 4].map((l) => (
-                    <div key={l} className={`aspect-square w-3 sm:w-5 rounded-[3px] sm:rounded-md border ${getLevelColor(l)}`} />
-                  ))}
-                  <span className="text-[10px] sm:text-[11px] font-mono text-[#787774] dark:text-neutral-400 ml-1">More</span>
-                </div>
+              {/* Legend */}
+              <div className="flex items-center justify-end gap-1.5 sm:gap-2 pt-2">
+                <span className="text-[10px] sm:text-[11px] font-mono text-[#787774] dark:text-neutral-400 mr-1">Less</span>
+                {[0, 1, 2, 3, 4].map((l) => (
+                  <div key={l} className={`aspect-square w-3.5 sm:w-5 rounded-[3px] sm:rounded-md border ${getLevelColor(l)}`} />
+                ))}
+                <span className="text-[10px] sm:text-[11px] font-mono text-[#787774] dark:text-neutral-400 ml-1">More</span>
               </div>
             </div>
           )}
