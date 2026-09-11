@@ -1,10 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { portfolioData } from '@/data/portfolioData';
 import { ArrowUpRight } from 'lucide-react';
 
 const SPRING = { type: 'spring', stiffness: 340, damping: 28 } as const;
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export function About() {
   const { bio } = portfolioData;
@@ -33,8 +35,8 @@ export function About() {
           <motion.p
             variants={{
               hidden: { opacity: 0, y: 20 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-            }}
+              show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
+            } as Variants}
             className="font-semibold text-[#37352f] dark:text-white"
           >
             {bio.intro}
@@ -44,8 +46,8 @@ export function About() {
           <motion.p
             variants={{
               hidden: { opacity: 0, y: 20 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-            }}
+              show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
+            } as Variants}
           >
             {bio.details}
           </motion.p>
@@ -54,8 +56,8 @@ export function About() {
           <motion.p
             variants={{
               hidden: { opacity: 0, y: 20 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-            }}
+              show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
+            } as Variants}
             className="flex items-center gap-2 flex-wrap"
           >
             <span>Right now, I&apos;m building</span>
@@ -78,8 +80,8 @@ export function About() {
           <motion.p
             variants={{
               hidden: { opacity: 0, y: 20 },
-              show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-            }}
+              show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
+            } as Variants}
           >
             {bio.closing}
           </motion.p>

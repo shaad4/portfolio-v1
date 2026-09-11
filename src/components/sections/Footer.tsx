@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { portfolioData } from '@/data/portfolioData';
 import { Copy, Check, ArrowUpRight } from 'lucide-react';
 
 const SPRING = { type: 'spring', stiffness: 340, damping: 28 } as const;
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export function Footer() {
   const [copied, setCopied] = useState(false);
@@ -59,7 +61,7 @@ export function Footer() {
       >
         {/* CRAFTED BY */}
         <motion.div
-          variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } } }}
+          variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease } } } as Variants}
           className="space-y-4"
         >
           <h4 className="text-xs uppercase tracking-wider text-[#787774] dark:text-neutral-500 font-semibold">CRAFTED BY</h4>
@@ -87,7 +89,7 @@ export function Footer() {
 
         {/* INSPIRED BY */}
         <motion.div
-          variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } } }}
+          variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease } } } as Variants}
           className="space-y-4"
         >
           <h4 className="text-xs uppercase tracking-wider text-[#787774] dark:text-neutral-500 font-semibold">INSPIRED BY</h4>
@@ -109,7 +111,7 @@ export function Footer() {
 
         {/* COLOPHON */}
         <motion.div
-          variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } } }}
+          variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease } } } as Variants}
           className="space-y-4"
         >
           <h4 className="text-xs uppercase tracking-wider text-[#787774] dark:text-neutral-500 font-semibold">COLOPHON</h4>
@@ -131,7 +133,7 @@ export function Footer() {
 
         {/* PROJECT */}
         <motion.div
-          variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } } }}
+          variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.45, ease } } } as Variants}
           className="space-y-4"
         >
           <h4 className="text-xs uppercase tracking-wider text-[#787774] dark:text-neutral-500 font-semibold">PROJECT</h4>
