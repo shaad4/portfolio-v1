@@ -143,14 +143,14 @@ export function GithubGraph() {
             </div>
 
             {/* Hover / Selection detail panel */}
-            <AnimatePresence mode="wait">
+            <AnimatePresence initial={false}>
               {hovered ? (
                 <motion.div
                   key={hovered.date}
-                  initial={{ opacity: 0, y: -6, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -4, scale: 0.95 }}
-                  transition={{ duration: 0.15 }}
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 4 }}
+                  transition={{ duration: 0.08 }}
                   className="flex-shrink-0 text-right flex items-center gap-2"
                 >
                   <div>
@@ -179,7 +179,7 @@ export function GithubGraph() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.1 }}
                   className="text-[10px] sm:text-xs font-mono text-[#787774]/60 dark:text-neutral-600 self-center text-right"
                 >
                   {data && (isMobile ? 'Tap a cell for details' : 'Hover a cell to see details')}
@@ -261,11 +261,11 @@ export function GithubGraph() {
                         onMouseEnter={() => {
                           if (!isMobile) setHovered(day);
                         }}
-                        className={`w-5.5 h-5.5 sm:w-auto sm:h-auto aspect-square rounded-[4px] sm:rounded-md border transition-all duration-100 cursor-pointer sm:cursor-default
+                        className={`w-5.5 h-5.5 sm:w-auto sm:h-auto aspect-square rounded-[4px] sm:rounded-md border transition-all duration-75 cursor-pointer sm:cursor-default
                           ${getLevelColor(day.level)}
                           ${hovered?.date === day.date
-                            ? 'scale-125 ring-2 ring-offset-1 ring-neutral-400 dark:ring-neutral-500 dark:ring-offset-[#222226] z-10'
-                            : 'hover:scale-110'
+                            ? 'ring-2 ring-neutral-900 dark:ring-white ring-offset-1 ring-offset-white dark:ring-offset-[#222226] z-20 brightness-110 shadow-sm'
+                            : 'hover:brightness-105'
                           }
                         `}
                       />

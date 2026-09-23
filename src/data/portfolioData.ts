@@ -408,10 +408,10 @@ export const portfolioData: PortfolioData = {
       "I enjoy building with Python, Django, FastAPI, React, and databases, while constantly learning how to build better systems.",
 
     currentBuilding: {
-      name: 'Backend & Distributed Systems',
+      name: 'Relay',
       description:
-        "Exploring backend engineering, system design, and scalable applications.",
-      url: 'https://github.com/shaad4',
+        ', a multi-tenant AI workflow automation platform focused on FastAPI, microservices, event-driven architecture, RAG, and distributed systems.',
+      url: 'https://github.com/shaad4/relay-workflow-automation',
     },
 
     closing:

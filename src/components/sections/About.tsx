@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { portfolioData } from '@/data/portfolioData';
-import { ArrowUpRight } from 'lucide-react';
 
 const SPRING = { type: 'spring', stiffness: 340, damping: 28 } as const;
 const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
@@ -58,9 +57,9 @@ export function About() {
               hidden: { opacity: 0, y: 20 },
               show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
             } as Variants}
-            className="flex items-center gap-2 flex-wrap"
+            className="leading-relaxed"
           >
-            <span>Right now, I&apos;m building</span>
+            <span>Right now, I&apos;m building </span>
             <motion.a
               href={bio.currentBuilding.url}
               target="_blank"
@@ -68,9 +67,13 @@ export function About() {
               whileHover={{ scale: 1.04, y: -1 }}
               whileTap={{ scale: 0.97 }}
               transition={SPRING}
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-neutral-100 dark:bg-[#28282e] border border-neutral-300 dark:border-neutral-700 text-[#37352f] dark:text-white font-medium text-[13px] sm:text-sm hover:bg-neutral-200 dark:hover:bg-[#32323a] transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-neutral-100 dark:bg-[#28282e] border border-neutral-300 dark:border-neutral-700 text-[#37352f] dark:text-white font-medium text-[13px] sm:text-sm hover:bg-neutral-200 dark:hover:bg-[#32323a] transition-colors shadow-sm align-middle my-0.5"
             >
-              <ArrowUpRight className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <img
+                src="/relay-icon.png"
+                alt="Relay Icon"
+                className="w-4 h-4 rounded-sm object-contain dark:invert"
+              />
               <span>{bio.currentBuilding.name}</span>
             </motion.a>
             <span>{bio.currentBuilding.description}</span>
