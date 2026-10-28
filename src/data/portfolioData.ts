@@ -109,7 +109,7 @@ export const portfolioData: PortfolioData = {
       company: 'Brocamp',
       role: 'Self-Directed Software Trainee',
       type: 'Training',
-      period: 'Jun 2026 - Present',
+      period: 'AUG 2025 - Present',
       location: 'India',
       logoUrl: '/brototype.jpg',
       logoBg: 'bg-blue-600',
